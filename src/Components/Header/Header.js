@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { Context } from "../../store/Context";
 import { signOut } from "firebase/auth";
 import "./Header.css";
@@ -9,14 +10,15 @@ import SellButton from "../../assets/SellButton";
 import SellButtonPlus from "../../assets/SellButtonPlus";
 
 function Header() {
-  const { auth } = useContext(Context); // Access Firebase Auth from Context
-  const user = auth.currentUser; // Get the current user
-  const [dropdownVisible, setDropdownVisible] = useState(false); // Manage dropdown visibility
+  const { auth } = useContext(Context);
+  const user = auth.currentUser;
+  const [dropdownVisible, setDropdownVisible] = useState(false);
+  const history = useHistory();
 
   const handleLogout = () => {
     signOut(auth)
       .then(() => {
-        alert("Logged out successfully!");
+        history.push('/login')
       })
       .catch((error) => {
         console.error("Error during logout:", error.message);
