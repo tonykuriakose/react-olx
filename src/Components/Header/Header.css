@@ -162,3 +162,54 @@
     display: none;
   }
 }
+.logoutButton {
+  background-color: #ff5722;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  margin-left: 10px;
+}
+
+.logoutButton:hover {
+  background-color: #e64a19;
+}
+.dropdownContainer {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.userDisplayName {
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  padding: 10px;
+  z-index: 1000;
+  width: 150px;
+}
+
+.dropdownItem {
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  padding: 8px 12px;
+  cursor: pointer;
+  color: #333;
+  font-size: 0.9rem;
+}
+
+.dropdownItem:hover {
+  background-color: #f2f2f2;
+}

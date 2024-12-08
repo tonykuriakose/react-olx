@@ -1,9 +1,10 @@
 import React, { useState, useContext } from 'react';
+import {useHistory} from 'react-router-dom'
 import { Context } from '../../store/Context';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import Logo from '../../olx-logo.png';
 import './Login.css';
-import {useHistory} from 'react-router-dom'
+
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -61,3 +62,10 @@ function Login() {
 }
 
 export default Login;
+
+
+
+
+
+
+

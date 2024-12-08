@@ -13,7 +13,7 @@ export default function Signup() {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
-  const { auth, db } = useContext(Context);
+  const { auth} = useContext(Context);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
