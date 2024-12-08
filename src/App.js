@@ -1,5 +1,5 @@
 import React from "react";
-import {BrowserRouter as Router,Route,} from "react-router-dom/cjs/react-router-dom.min";
+import {BrowserRouter as Router,Route} from "react-router-dom/cjs/react-router-dom.min";
 import "./App.css";
 import Home from "./Pages/Home";
 import Signup from "./Pages/Signup"

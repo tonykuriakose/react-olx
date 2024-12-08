@@ -3,17 +3,17 @@ import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { app } from "../firebase/config";
 
-const FirebaseContext = createContext(null);
+const Context = createContext(null);
 
-const FirebaseProvider = ({ children }) => {
+const Firebase = ({ children }) => {
   const auth = getAuth(app);
   const db = getFirestore(app);
 
   return (
-    <FirebaseContext.Provider value={{ auth, db }}>
+    <Context.Provider value={{ auth, db }}>
       {children}
-    </FirebaseContext.Provider>
+    </Context.Provider>
   );
 };
 
-export { FirebaseContext, FirebaseProvider };
+export { Context, Firebase };
