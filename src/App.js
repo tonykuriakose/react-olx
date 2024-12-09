@@ -2,6 +2,8 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "./Pages/Home";
 import Signup from "./Pages/Signup";
 import Login from "./Pages/Login";
+import Create from './Pages/Create';
+import View from './Pages/ViewPost';
 
 function App() {
   return (
@@ -16,6 +18,12 @@ function App() {
           </Route>
           <Route path="/login">
             <Login />
+          </Route>
+          <Route path="/create">
+            <Create />
+          </Route>
+          <Route path="/view">
+            <View />
           </Route>
         </Switch>
       </Router>

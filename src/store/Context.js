@@ -11,11 +11,10 @@ const Firebase = ({ children }) => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    // Set up a listener for authentication state changes
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
     });
-    return () => unsubscribe(); // Clean up the listener on component unmount
+    return () => unsubscribe();
   }, [auth]);
 
   return (
