@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useHistory, Link } from "react-router-dom/cjs/react-router-dom.min";
 import { Context } from "../../store/Context";
 import { signOut } from "firebase/auth";
 import "./Header.css";
@@ -18,7 +18,7 @@ function Header() {
   const handleLogout = () => {
     signOut(auth)
       .then(() => {
-        history.push('/login')
+        history.push('/login');
       })
       .catch((error) => {
         console.error("Error during logout:", error.message);
@@ -73,10 +73,10 @@ function Header() {
         </div>
         <div className="sellMenu">
           <SellButton />
-          <div className="sellMenuContent">
+          <Link to="/create" className="sellMenuContent">
             <SellButtonPlus />
             <span>SELL</span>
-          </div>
+          </Link>
         </div>
       </div>
     </div>
@@ -84,3 +84,4 @@ function Header() {
 }
 
 export default Header;
+

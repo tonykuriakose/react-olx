@@ -1,23 +1,22 @@
 import React, { useState, useContext } from 'react';
-import {useHistory} from 'react-router-dom'
+import { useHistory, Link } from 'react-router-dom';
 import { Context } from '../../store/Context';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import Logo from '../../olx-logo.png';
 import './Login.css';
 
-
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { auth } = useContext(Context); 
-  const history = useHistory()
+  const history = useHistory();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      await signInWithEmailAndPassword(auth, email, password).then(()=>{
-        history.push('/')
-      })
+      await signInWithEmailAndPassword(auth, email, password).then(() => {
+        history.push('/');
+      });
     } catch (error) {
       alert(error.message);
     }
@@ -55,14 +54,13 @@ function Login() {
           <br />
           <button>Login</button>
         </form>
-        <a href="/signup">Signup</a>
+        <Link to="/signup">Signup</Link>
       </div>
     </div>
   );
 }
 
 export default Login;
-
 
 
 

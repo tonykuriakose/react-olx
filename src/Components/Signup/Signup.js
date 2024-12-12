@@ -1,11 +1,10 @@
-import React, { useState , useContext } from "react";
-import { useHistory } from "react-router-dom";
+import React, { useState, useContext } from "react";
+import { useHistory, Link } from "react-router-dom";
 import Logo from "../../olx-logo.png";
 import "./Signup.css";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { getFirestore, collection, addDoc } from "firebase/firestore";
 import { Context } from "../../store/Context";
-
 
 export default function Signup() {
   const history = useHistory();
@@ -13,15 +12,19 @@ export default function Signup() {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
-  const { auth} = useContext(Context);
+  const { auth } = useContext(Context);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const result = await createUserWithEmailAndPassword(auth, email, password);
-      await updateProfile(result.user, {displayName: username});
+      await updateProfile(result.user, { displayName: username });
       const firestore = getFirestore();
-      await addDoc(collection(firestore, "users"), {id: result.user.uid,username: username,phone: phone});
+      await addDoc(collection(firestore, "users"), {
+        id: result.user.uid,
+        username: username,
+        phone: phone,
+      });
       history.push("/login");
     } catch (error) {
       console.error("Error creating user:", error.message);
@@ -80,8 +83,9 @@ export default function Signup() {
           <br />
           <button>Signup</button>
         </form>
-        <a href="/login">Login</a>
+        <Link to="/login">Login</Link>
       </div>
     </div>
   );
 }
+
