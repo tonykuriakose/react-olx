@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { useHistory, Link } from "react-router-dom/cjs/react-router-dom.min";
+import { useHistory, Link } from "react-router-dom"; // Correct import for Link
 import { Context } from "../../store/Context";
 import { signOut } from "firebase/auth";
 import "./Header.css";
@@ -67,7 +67,7 @@ function Header() {
               )}
             </div>
           ) : (
-            <span>Login</span>
+            <Link to="/login" className="loginLink">Login</Link> 
           )}
           <hr />
         </div>
@@ -84,4 +84,3 @@ function Header() {
 }
 
 export default Header;
-
