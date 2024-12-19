@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { useHistory, Link } from "react-router-dom"; // Correct import for Link
+import { useHistory, Link } from "react-router-dom"; 
 import { Context } from "../../store/Context";
 import { signOut } from "firebase/auth";
 import "./Header.css";
@@ -18,7 +18,7 @@ function Header() {
   const handleLogout = () => {
     signOut(auth)
       .then(() => {
-        history.push('/login');
+        history.push("/login");
       })
       .catch((error) => {
         console.error("Error during logout:", error.message);
@@ -27,6 +27,15 @@ function Header() {
 
   const toggleDropdown = () => {
     setDropdownVisible(!dropdownVisible);
+  };
+
+  const handleSellClick = () => {
+    if (user) {
+      history.push("/create");
+    } else {
+      alert("Please login to create a listing.");
+      history.push("/login");
+    }
   };
 
   return (
@@ -73,10 +82,10 @@ function Header() {
         </div>
         <div className="sellMenu">
           <SellButton />
-          <Link to="/create" className="sellMenuContent">
+          <div onClick={handleSellClick} className="sellMenuContent">
             <SellButtonPlus />
             <span>SELL</span>
-          </Link>
+          </div>
         </div>
       </div>
     </div>

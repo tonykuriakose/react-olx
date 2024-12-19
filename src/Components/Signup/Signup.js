@@ -27,10 +27,15 @@ export default function Signup() {
       });
       history.push("/login");
     } catch (error) {
-      console.error("Error creating user:", error.message);
+      if (error.code === "auth/email-already-in-use") {
+        alert("This email is already in use. Please try logging in or use a different email.");
+      } else {
+        console.error("Error creating user:", error.message);
+        alert("An error occurred while creating your account. Please try again later.");
+      }
     }
   };
-
+  
   return (
     <div>
       <div className="signupParentDiv">
