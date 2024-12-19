@@ -1,4 +1,3 @@
-
 import React, { Fragment, useContext, useState } from "react";
 import "./Create.css";
 import Header from "../Header/Header";
@@ -8,7 +7,7 @@ import { getFirestore, collection, addDoc } from "firebase/firestore";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const Create = () => {
-  const { auth, user } = useContext(Context);
+  const {user } = useContext(Context);
   const [name, setName] = useState("");
   const [category, setCategory] = useState("");
   const [price, setPrice] = useState("");

@@ -1,53 +1,93 @@
 .viewParentDiv {
-  padding-top: 4em;
   display: flex;
-}
-.viewParentDiv .imageShowDiv {
-  padding: 16px;
-  width: 60vw; /* Reduced width for better balance */
-}
-.viewParentDiv .imageShowDiv img {
-  width: 50vw; /* Adjusted for a medium size */
-  height: auto; /* Maintain aspect ratio */
-  max-height: 70vh; /* Ensure it doesn't exceed viewport height */
-  border-radius: 8px; /* Optional for a polished look */
-  object-fit: contain; /* Prevent distortion */
+  justify-content: center;
+  padding: 2rem;
 }
 
-.viewParentDiv .rightSection {
-  padding: 16px;
-  margin-top: 3em;
-  width: 40vw; /* Adjusted for balance with the image */
+.imageShowDiv {
+  width: 60vw;
+  display: flex;
+  justify-content: center;
+  margin-right: 2rem;
 }
 
-.viewParentDiv .rightSection .productDetails :first-child {
-  font-weight: 700;
-  margin-bottom: 8px;
-  color: #002f34;
-  font-size: 34px;
-  line-height: 32px;
-  margin-bottom: 20px;
-}
-
-.viewParentDiv .rightSection .productDetails {
-  border: 1px solid black;
-  padding: 6px;
-  border-radius: 6px;
-  margin-bottom: 2em;
+.imageShowDiv img {
   width: 100%;
+  height: auto;
+  border-radius: 8px;
 }
 
-.viewParentDiv .rightSection .contactDetails {
-  border: 1px solid black;
-  padding: 6px;
+.crudSection {
+  width: 35vw;
+  padding: 2rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.crudTitle h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.crudForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.inputGroup {
+  margin-bottom: 1.5rem;
+}
+
+.inputGroup label {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 0.5rem;
+}
+
+.inputGroup input {
+  padding: 0.8rem;
+  font-size: 16px;
+  border: 1px solid #ddd;
   border-radius: 6px;
+  width: 100%;
+  outline: none;
 }
 
-.viewParentDiv .rightSection .contactDetails :first-child {
-  font-size: 20px;
-  line-height: 24px;
-  font-weight: 700;
-  color: #002f34;
-  font-weight: 400;
-  padding: 0;
+.inputGroup input:focus {
+  border-color: #007bff;
+}
+
+.crudButtons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.crudButtons button {
+  padding: 0.8rem 1.5rem;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 48%;
+}
+
+.updateBtn {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.updateBtn:hover {
+  background-color: #45a049;
+}
+
+.deleteBtn {
+  background-color: #f44336;
+  color: white;
+}
+
+.deleteBtn:hover {
+  background-color: #e53935;
 }
