@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import Heart from "../../assets/Heart";
 import "./Post.css";
 import { getFirestore, collection, getDocs } from "firebase/firestore";
@@ -6,6 +7,7 @@ import { getFirestore, collection, getDocs } from "firebase/firestore";
 function Posts() {
   const db = getFirestore();
   const [products, setProducts] = useState([]);
+  const history = useHistory();
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -24,6 +26,10 @@ function Posts() {
     fetchProducts();
   }, [db]);
 
+  const handleImageClick = (product) => {
+    history.push("/view", { product });
+  };
+
   return (
     <div className="postParentDiv">
       <div className="moreView">
@@ -38,7 +44,7 @@ function Posts() {
               <div className="favorite">
                 <Heart />
               </div>
-              <div className="image">
+              <div className="image" onClick={() => handleImageClick(product)}>
                 <img src={product.imageUrl} alt={product.name} />
               </div>
               <div className="content">
@@ -57,34 +63,10 @@ function Posts() {
           ))}
         </div>
       </div>
-      <div className="recommendations">
-        <div className="heading">
-          <span>Fresh recommendations</span>
-        </div>
-        <div className="cards">
-          <div className="card">
-            <div className="favorite">
-              <Heart />
-            </div>
-            <div className="image">
-              <img src="../../../Images/R15V3.jpg" alt="Yamaha R15V3" />
-            </div>
-            <div className="content">
-              <p className="rate">&#x20B9; 250000</p>
-              <span className="kilometer">Two Wheeler</span>
-              <p className="name">YAMAHA R15V3</p>
-            </div>
-            <div className="date">
-              <span>10/5/2021</span>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   );
 }
 
 export default Posts;
-
 
 
