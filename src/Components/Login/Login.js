@@ -18,10 +18,26 @@ function Login() {
         history.push('/');
       });
     } catch (error) {
-      alert(error.message);
+      switch (error.code) {
+        case 'auth/invalid-email':
+          alert('The email address is not valid. Please check and try again.');
+          break;
+        case 'auth/user-disabled':
+          alert('This account has been disabled. Please contact support.');
+          break;
+        case 'auth/user-not-found':
+          alert('No account found with this email. Please sign up.');
+          break;
+        case 'auth/wrong-password':
+          alert('The password is incorrect. Please try again.');
+          break;
+        default:
+          alert('The password is incorrect. Please try again.');
+          console.error('Firebase error:', error.message);
+      }
     }
   };
-
+  
   return (
     <div>
       <div className="loginParentDiv">
@@ -61,6 +77,9 @@ function Login() {
 }
 
 export default Login;
+
+
+
 
 
 
