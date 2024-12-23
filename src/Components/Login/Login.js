@@ -1,43 +1,46 @@
-import React, { useState, useContext } from 'react';
-import { useHistory, Link } from 'react-router-dom';
-import { Context } from '../../store/Context';
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import Logo from '../../olx-logo.png';
-import './Login.css';
+import React, { useState, useContext } from "react";
+import { useHistory, Link } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { Context } from "../../store/Context";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import Logo from "../../olx-logo.png";
+import "./Login.css";
 
 function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const { auth } = useContext(Context); 
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { auth } = useContext(Context);
   const history = useHistory();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
       await signInWithEmailAndPassword(auth, email, password).then(() => {
-        history.push('/');
+        toast.success("Login successful!");
+        setTimeout(() => history.push("/"), 2000);
       });
     } catch (error) {
       switch (error.code) {
-        case 'auth/invalid-email':
-          alert('The email address is not valid. Please check and try again.');
+        case "auth/invalid-email":
+          toast.error("The email address is not valid. Please check and try again.");
           break;
-        case 'auth/user-disabled':
-          alert('This account has been disabled. Please contact support.');
+        case "auth/user-disabled":
+          toast.error("This account has been disabled. Please contact support.");
           break;
-        case 'auth/user-not-found':
-          alert('No account found with this email. Please sign up.');
+        case "auth/user-not-found":
+          toast.error("No account found with this email. Please sign up.");
           break;
-        case 'auth/wrong-password':
-          alert('The password is incorrect. Please try again.');
+        case "auth/wrong-password":
+          toast.error("The password is incorrect. Please try again.");
           break;
         default:
-          alert('The password is incorrect. Please try again.');
-          console.error('Firebase error:', error.message);
+          toast.error("An error occurred. Please try again.");
+          console.error("Firebase error:", error.message);
       }
     }
   };
-  
+
   return (
     <div>
       <div className="loginParentDiv">
@@ -72,11 +75,13 @@ function Login() {
         </form>
         <Link to="/signup">Signup</Link>
       </div>
+      <ToastContainer />
     </div>
   );
 }
 
 export default Login;
+
 
 
 

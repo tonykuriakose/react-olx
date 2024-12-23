@@ -5,6 +5,8 @@ import "./Signup.css";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { getFirestore, collection, addDoc } from "firebase/firestore";
 import { Context } from "../../store/Context";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Signup() {
   const history = useHistory();
@@ -16,6 +18,11 @@ export default function Signup() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!username || !email || !phone || !password) {
+      toast.error("All fields are required!", { position: "top-center" });
+      return;
+    }
+
     try {
       const result = await createUserWithEmailAndPassword(auth, email, password);
       await updateProfile(result.user, { displayName: username });
@@ -25,17 +32,24 @@ export default function Signup() {
         username: username,
         phone: phone,
       });
-      history.push("/login");
+      toast.success("Signup successful!", {
+        position: "top-center",
+      });
+      setTimeout(() => history.push("/login"), 2000);
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {
-        alert("This email is already in use. Please try logging in or use a different email.");
+        toast.error("This email is already in use. Please try another one.", {
+          position: "top-center",
+        });
       } else {
         console.error("Error creating user:", error.message);
-        alert("An error occurred while creating your account. Please try again later.");
+        toast.error("An error occurred while creating your account. Please try again.", {
+          position: "top-center",
+        });
       }
     }
   };
-  
+
   return (
     <div>
       <div className="signupParentDiv">
@@ -90,7 +104,9 @@ export default function Signup() {
         </form>
         <Link to="/login">Login</Link>
       </div>
+      <ToastContainer />
     </div>
   );
 }
+
 
