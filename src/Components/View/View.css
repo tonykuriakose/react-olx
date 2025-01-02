@@ -1,36 +1,61 @@
-.viewParentDiv {
-  display: flex;
-  justify-content: center;
-  padding: 2rem;
-}
-
-.imageShowDiv {
-  width: 60vw;
-  display: flex;
-  justify-content: center;
-  margin-right: 2rem;
-}
-
+/* Product Image Styling */
 .imageShowDiv img {
-  width: 100%;
+  width: 60%;
   height: auto;
+  max-width: 400px;
   border-radius: 8px;
+  object-fit: cover;
 }
 
+/* Form Input Styling */
+.crudForm input {
+  padding: 0.8rem;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  width: 100%;
+  outline: none;
+}
+
+.crudForm input:focus {
+  border-color: #007bff;
+}
+
+.crudForm input.error {
+  border-color: red;
+}
+
+/* Error Message Styling */
+.error-message {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+/* Styled Product Box */
 .crudSection {
   width: 35vw;
   padding: 2rem;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  background-color: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
 }
 
+.crudSection:hover {
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Title Styling */
 .crudTitle h2 {
   text-align: center;
   color: #333;
   margin-bottom: 1rem;
+  font-size: 1.5rem;
 }
 
+/* Form Layout */
 .crudForm {
   display: flex;
   flex-direction: column;
@@ -46,19 +71,7 @@
   margin-bottom: 0.5rem;
 }
 
-.inputGroup input {
-  padding: 0.8rem;
-  font-size: 16px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  width: 100%;
-  outline: none;
-}
-
-.inputGroup input:focus {
-  border-color: #007bff;
-}
-
+/* Buttons */
 .crudButtons {
   display: flex;
   justify-content: space-between;
@@ -90,4 +103,44 @@
 
 .deleteBtn:hover {
   background-color: #e53935;
+}
+
+/* Toastify Styles */
+.Toastify__toast-container {
+  font-family: Arial, sans-serif;
+}
+
+.Toastify__toast {
+  font-size: 14px;
+  border-radius: 8px;
+}
+
+/* Centering Product View */
+.viewParentDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full viewport height */
+  padding: 2rem;
+}
+
+.imageShowDiv {
+  width: 40vw; /* Adjust size of image */
+  display: flex;
+  justify-content: center;
+  margin-right: 2rem;
+}
+
+.crudSection {
+  width: 40vw; /* Adjust size of form */
+  padding: 2rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.crudTitle h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 1rem;
 }
