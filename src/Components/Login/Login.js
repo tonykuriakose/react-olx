@@ -10,11 +10,24 @@ import "./Login.css";
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState({});
   const { auth } = useContext(Context);
   const history = useHistory();
 
   const handleLogin = async (e) => {
     e.preventDefault();
+
+    const validationErrors = {};
+    if (!email.trim()) validationErrors.email = "Email is required.";
+    if (!password.trim()) validationErrors.password = "Password is required.";
+
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
+
+    setErrors({}); 
+
     try {
       await signInWithEmailAndPassword(auth, email, password).then(() => {
         toast.success("Login successful!");
@@ -46,32 +59,36 @@ function Login() {
       <div className="loginParentDiv">
         <img width="200px" height="200px" src={Logo} alt="Logo" />
         <form onSubmit={handleLogin}>
-          <label htmlFor="fname">Email</label>
+          <label htmlFor="email">Email</label>
           <br />
           <input
             className="input"
             type="email"
-            id="fname"
+            id="email"
             name="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Enter your email"
           />
+          {errors.email && <span className="error">{errors.email}</span>}
           <br />
-          <label htmlFor="lname">Password</label>
+
+          <label htmlFor="password">Password</label>
           <br />
           <input
             className="input"
             type="password"
-            id="lname"
+            id="password"
             name="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Enter your password"
           />
+          {errors.password && <span className="error">{errors.password}</span>}
           <br />
           <br />
-          <button>Login</button>
+
+          <button type="submit">Login</button>
         </form>
         <Link to="/signup">Signup</Link>
       </div>
@@ -81,9 +98,6 @@ function Login() {
 }
 
 export default Login;
-
-
-
 
 
 
