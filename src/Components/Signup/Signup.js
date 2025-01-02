@@ -14,14 +14,24 @@ export default function Signup() {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState({});
   const { auth } = useContext(Context);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!username || !email || !phone || !password) {
-      toast.error("All fields are required!", { position: "top-center" });
+    const validationErrors = {};
+
+    if (!username.trim()) validationErrors.username = "Username is required.";
+    if (!email.trim()) validationErrors.email = "Email is required.";
+    if (!phone.trim()) validationErrors.phone = "Phone number is required.";
+    if (!password.trim()) validationErrors.password = "Password is required.";
+
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
       return;
     }
+
+    setErrors({}); 
 
     try {
       const result = await createUserWithEmailAndPassword(auth, email, password);
@@ -32,9 +42,7 @@ export default function Signup() {
         username: username,
         phone: phone,
       });
-      toast.success("Signup successful!", {
-        position: "top-center",
-      });
+      toast.success("Signup successful!", { position: "top-center" });
       setTimeout(() => history.push("/login"), 2000);
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {
@@ -43,9 +51,10 @@ export default function Signup() {
         });
       } else {
         console.error("Error creating user:", error.message);
-        toast.error("An error occurred while creating your account. Please try again.", {
-          position: "top-center",
-        });
+        toast.error(
+          "An error occurred while creating your account. Please try again.",
+          { position: "top-center" }
+        );
       }
     }
   };
@@ -55,52 +64,60 @@ export default function Signup() {
       <div className="signupParentDiv">
         <img width="200px" height="200px" src={Logo} alt="logo" />
         <form onSubmit={handleSubmit}>
-          <label htmlFor="fname">Username</label>
+          <label htmlFor="username">Username</label>
           <br />
           <input
             className="input"
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            id="fname"
-            name="name"
+            id="username"
+            name="username"
           />
+          {errors.username && <span className="error">{errors.username}</span>}
           <br />
-          <label htmlFor="fname">Email</label>
+
+          <label htmlFor="email">Email</label>
           <br />
           <input
             className="input"
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            id="fname"
+            id="email"
             name="email"
           />
+          {errors.email && <span className="error">{errors.email}</span>}
           <br />
-          <label htmlFor="lname">Phone</label>
+
+          <label htmlFor="phone">Phone</label>
           <br />
           <input
             className="input"
             type="number"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
-            id="lname"
+            id="phone"
             name="phone"
           />
+          {errors.phone && <span className="error">{errors.phone}</span>}
           <br />
-          <label htmlFor="lname">Password</label>
+
+          <label htmlFor="password">Password</label>
           <br />
           <input
             className="input"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            id="lname"
+            id="password"
             name="password"
           />
+          {errors.password && <span className="error">{errors.password}</span>}
           <br />
           <br />
-          <button>Signup</button>
+
+          <button type="submit">Signup</button>
         </form>
         <Link to="/login">Login</Link>
       </div>
@@ -108,5 +125,6 @@ export default function Signup() {
     </div>
   );
 }
+
 
 
