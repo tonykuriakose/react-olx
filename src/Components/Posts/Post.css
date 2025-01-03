@@ -1,87 +1,160 @@
+/* General Container Styling */
 .moreView {
-  margin: 16px 16px 24px;
-  padding: 16px 16px 32px;
+  margin: 16px;
+  padding: 16px;
   background-color: #ebeeef;
   border-radius: 4px;
 }
 
+/* Heading Section */
 .heading {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
 }
+
 .heading :first-child {
-  font-size: 24px;
+  font-size: 1.5rem; /* Responsive font size */
   color: #002f34;
 }
 
 .heading :last-child {
-  font-size: 14px;
+  font-size: 0.875rem; /* Smaller for subtext */
   color: #002f34;
-}
-
-.recommendations .cards {
-  display: flex;
-}
-
-.moreView .cards {
-  white-space: nowrap;
-  overflow-x: scroll;
-  overflow-y: hidden;
-}
-
-.card {
-  margin-right: 15px;
-  padding: 13px;
-  max-width: 222px;
-  width: 222px;
-  height: 270px;
-  display: inline-block;
   cursor: pointer;
 }
 
+/* Cards Container */
+.moreView .cards {
+  display: flex;
+  flex-wrap: nowrap; /* Horizontal scroll */
+  overflow-x: auto; /* Enable scrolling for smaller screens */
+  gap: 1rem; /* Add space between cards */
+  padding-bottom: 1rem; /* Spacing below cards */
+}
+
+/* Individual Card Styling */
+.card {
+  flex: 0 0 auto; /* Prevent cards from shrinking */
+  margin-right: 0;
+  padding: 13px;
+  max-width: 222px;
+  width: 100%; /* Make it fully responsive */
+  height: auto; /* Auto height for dynamic content */
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+/* Favorite Section */
 .card .favorite {
   display: flex;
   justify-content: flex-end;
   align-items: center;
 }
 
+/* Image Section */
 .card .image {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 10px;
 }
 
 .card .image img {
   height: 100px;
   max-width: 100%;
-  max-height: 100%;
-  min-height: 100%;
-  text-align: center;
+  object-fit: cover;
+  border-radius: 4px; /* Slight rounding for images */
 }
+
+/* Card Content */
 .card .content .rate {
   margin-top: 10px;
-  font-size: larger;
+  font-size: 1.25rem;
   font-weight: bold;
+  color: #333;
 }
+
 .card .content .kilometer {
-  font-size: medium;
+  font-size: 1rem;
+  color: #555;
 }
+
 .card .content .name {
-  font-size: small;
+  font-size: 0.875rem;
+  color: #666;
+  margin-top: 5px;
 }
+
+/* Date Section */
 .card .date {
   display: flex;
   justify-content: flex-end;
-  font-size: small;
+  font-size: 0.75rem;
+  color: #888;
 }
 
+/* Recommendations Section */
 .recommendations {
-  margin: 16px 16px 24px;
+  margin: 16px;
 }
 
 .recommendations .heading span {
-  font-size: 24px;
+  font-size: 1.5rem;
   color: #002f34;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .moreView {
+    padding: 12px;
+  }
+
+  .heading :first-child {
+    font-size: 1.25rem;
+  }
+
+  .heading :last-child {
+    font-size: 0.75rem;
+  }
+
+  .cards {
+    gap: 0.5rem;
+  }
+
+  .card {
+    max-width: 180px;
+    padding: 10px;
+  }
+
+  .card .image img {
+    height: 80px;
+  }
+
+  .card .content .rate {
+    font-size: 1rem;
+  }
+
+  .card .content .kilometer,
+  .card .content .name {
+    font-size: 0.75rem;
+  }
+
+  .card .date {
+    font-size: 0.65rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .heading {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .heading :last-child {
+    margin-top: 8px;
+  }
 }

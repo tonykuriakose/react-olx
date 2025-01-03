@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import Heart from "../../assets/Heart";
-import "./Post.css";
 import { getFirestore, collection, getDocs } from "firebase/firestore";
+import "./Post.css"; 
 
 function Posts() {
   const db = getFirestore();
@@ -31,42 +31,51 @@ function Posts() {
   };
 
   return (
-    <div className="postParentDiv">
-      <div className="moreView">
-        <div className="heading">
-          <span>Quick Menu</span>
-          <span>View more</span>
+    <div className="container my-4">
+      <div className="row mb-3">
+        <div className="col d-flex justify-content-between align-items-center">
+          <h2 className="fw-bold">Quick Menu</h2>
         </div>
+      </div>
 
-        <div className="cards">
-          {products.map((product) => (
-            <div key={product.id} className="card">
-              <div className="favorite">
+      <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
+        {products.map((product) => (
+          <div key={product.id} className="col">
+            <div className="card h-100 shadow-sm">
+              <div className="card-header text-end">
                 <Heart />
               </div>
-              <div className="image" onClick={() => handleImageClick(product)}>
-                <img src={product.imageUrl} alt={product.name} />
+              <div
+                className="card-img-top text-center"
+                style={{ cursor: "pointer" }}
+                onClick={() => handleImageClick(product)}
+              >
+                <img
+                  src={product.imageUrl}
+                  alt={product.name}
+                  className="img-fluid"
+                  style={{ maxHeight: "150px" }}
+                />
               </div>
-              <div className="content">
-                <p className="rate">&#x20B9; {product.price}</p>
-                <span className="kilometer">{product.category}</span>
-                <p className="name">{product.name}</p>
+              <div className="card-body">
+                <h5 className="card-title">&#x20B9; {product.price}</h5>
+                <p className="card-text text-muted mb-1">{product.category}</p>
+                <p className="card-text">{product.name}</p>
               </div>
-              <div className="date">
-                <span>
-                  {product.createdAt
-                    ? new Date(product.createdAt.seconds * 1000).toLocaleDateString()
-                    : "N/A"}
-                </span>
+              <div className="card-footer text-end text-muted">
+                {product.createdAt
+                  ? new Date(product.createdAt.seconds * 1000).toLocaleDateString()
+                  : "N/A"}
               </div>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
     </div>
   );
 }
 
 export default Posts;
+
 
 
